@@ -5,6 +5,9 @@ if [ -d /bundle ]; then
   tar xzf *.tar.gz
   cd /bundle/bundle/programs/server/
   npm i
+  rm -rf npm/npm-bcrypt/node_modules/bcrypt/
+  npm install bcrypt
+  cp -r node_modules/bcrypt npm/npm-bcrypt/node_modules/bcrypt
   cd /bundle/bundle/
 elif [[ $BUNDLE_URL ]]; then
   cd /tmp
@@ -14,7 +17,7 @@ elif [[ $BUNDLE_URL ]]; then
   npm i
   cd /tmp/bundle/
 elif [ -d /built_app ]; then
-  cd /built_app
+  cd /built_app/app
 else
   echo "=> You don't have an meteor app to run in this image."
   exit 1
